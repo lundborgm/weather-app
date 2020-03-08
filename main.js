@@ -5,21 +5,33 @@ let latitude = "57.708870";
 
 const container = document.querySelector(".container");
 const date = document.querySelector(".date");
+const time = document.querySelector(".time");
 
-//const today = new Date();
-const day = new Date().getDate();
-const month = new Date().getMonth() + 1;
-const year = new Date().getFullYear();
+const today = new Date();
+const day = today.getDate();
+const month = today.getMonth() + 1;
+const year = today.getFullYear();
 date.innerHTML = `${day}/${month}-${year}`;
+
+let hours = today.getHours();
+let minutes = today.getMinutes();
+time.innerHTML = `${hours}:${minutes}`;
 
 const cities = document.querySelectorAll("button");
 cities.forEach(city => {
-  city.addEventListener("click", () => {
+  city.addEventListener("click", e => {
+    cities.forEach(city => {
+      city.classList.remove("active");
+    });
+
+    e.currentTarget.classList.add("active");
+
     let longitude = city.dataset.longitudeValue;
     let latitude = city.dataset.latitudeValue;
 
     let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
     getWeather(url);
+    // another function here to display and append the data?
   });
 });
 
@@ -40,16 +52,16 @@ function getWeather(url) {
     .then(json => {
       // should be set to [0] to get the current date/time
       const currentTime = json.timeSeries[0];
-      const temp = currentTime.parameters[11].values[0];
-      const rain = currentTime.parameters[1].values[0];
+      let temp;
+      let rain;
 
       for (let i = 0; i < currentTime.parameters.length; i++) {
         if (currentTime.parameters[i].name === "t") {
-          console.log(currentTime.parameters[i].values[0]);
+          temp = currentTime.parameters[i].values[0];
         }
 
         if (currentTime.parameters[i].name === "pcat") {
-          console.log(currentTime.parameters[i].values[0]);
+          rain = currentTime.parameters[i].values[0];
         }
       }
 
@@ -73,3 +85,4 @@ function getWeather(url) {
 
 // https://opendata.smhi.se/apidocs/metfcst/parameters.html
 // https://opendata.smhi.se/apidocs/metfcst/parameters.html#parameter-pcat
+// https://www.latlong.net/
