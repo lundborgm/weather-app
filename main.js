@@ -1,11 +1,11 @@
 "use strict";
 
-let longitude = "11.974560";
-let latitude = "57.708870";
-
-const container = document.querySelector(".container");
+const cities = document.querySelector(".cities");
 const date = document.querySelector(".date");
 const time = document.querySelector(".time");
+const container = document.querySelector(".container");
+let longitude;
+let latitude;
 
 const today = new Date();
 const day = today.getDate();
@@ -17,23 +17,16 @@ let hours = today.getHours();
 let minutes = today.getMinutes();
 time.innerHTML = `${hours}:${minutes}`;
 
-const cities = document.querySelectorAll("button");
-cities.forEach(city => {
-  city.addEventListener("click", e => {
-    cities.forEach(city => {
-      city.classList.remove("active");
-    });
+function selectLocation() {
+  const city = cities.options[cities.selectedIndex];
+  longitude = city.dataset.longitude;
+  latitude = city.dataset.latitude;
+  console.log(city);
 
-    e.currentTarget.classList.add("active");
-
-    let longitude = city.dataset.longitudeValue;
-    let latitude = city.dataset.latitudeValue;
-
-    let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
-    getWeather(url);
-    // another function here to display and append the data?
-  });
-});
+  let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
+  getWeather(url);
+  // add another function here to display and append the data?
+}
 
 // Check for rain
 const doesItRain = x => {
@@ -66,11 +59,11 @@ function getWeather(url) {
       }
 
       if (doesItRain(rain)) {
-        console.log("RAIN :(");
+        //console.log("RAIN :(");
         const icon = "🌧";
         container.innerHTML = icon;
       } else {
-        console.log("NO RAIN :)");
+        //console.log("NO RAIN :)");
         const icon = "☀️";
         container.innerHTML = icon;
       }
@@ -79,9 +72,14 @@ function getWeather(url) {
       temperature.innerHTML = `${temp} °C`;
       container.appendChild(temperature);
 
-      console.log(`${temp} °C`);
+      //console.log(`${temp} °C`);
     });
 }
+
+cities.addEventListener("change", selectLocation);
+
+// Create an init function where you run this?
+selectLocation();
 
 // https://opendata.smhi.se/apidocs/metfcst/parameters.html
 // https://opendata.smhi.se/apidocs/metfcst/parameters.html#parameter-pcat

@@ -2,8 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 main {
@@ -15,27 +14,17 @@ main {
   flex-direction: column;
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 10vh;
-  width: 50%;
-}
-
-button {
-  height: 30px;
-  width: 150px;
+.cities {
+  height: 40px;
+  width: 120px;
+  font-size: 14px;
   border: none;
   box-shadow: 4px 4px 5px 1px rgba(138, 138, 138, 0.75);
   border-radius: 10px;
   cursor: pointer;
-  color: rgb(92, 92, 92);
-}
-
-.active {
-  box-shadow: 4px 4px 5px 1px rgba(36, 36, 36, 0.75);
-  color: black;
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  padding: 0 10px;
 }
 
 .info {
