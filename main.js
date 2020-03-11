@@ -3,39 +3,81 @@
 const cities = document.querySelector(".cities");
 const date = document.querySelector(".date");
 const time = document.querySelector(".time");
+const test = document.querySelector(".test");
+const test2 = document.querySelector(".test2");
 const container = document.querySelector(".container");
 let longitude;
 let latitude;
-
 const today = new Date();
-const day = today.getDate();
+let day = today.getDate();
 const month = today.getMonth() + 1;
-const year = today.getFullYear();
-date.innerHTML = `${day}/${month}-${year}`;
+let week = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+let months = [
+  "DEC",
+  "JAN",
+  "FEB",
+  "MAR",
+  "APR",
+  "MAY",
+  "JUN",
+  "JUL",
+  "AUG",
+  "SEP",
+  "OCT",
+  "NOV"
+];
+let weekday = week[today.getDay()];
+const currentMonth = months[month];
+test.innerHTML = weekday;
+date.innerHTML = day;
+test2.innerHTML = currentMonth;
 
-let hours = today.getHours();
-let minutes = today.getMinutes();
-time.innerHTML = `${hours}:${minutes}`;
+//let hours = today.getHours();
+//let minutes = today.getMinutes();
+//time.innerHTML = `${hours}:${minutes}`;
 
 function selectLocation() {
   const city = cities.options[cities.selectedIndex];
   longitude = city.dataset.longitude;
   latitude = city.dataset.latitude;
-  console.log(city);
 
   let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
   getWeather(url);
+  selectDate();
   // add another function here to display and append the data?
 }
 
+function selectDate() {
+  const previous = document.querySelector(".previous-day");
+  const next = document.querySelector(".next-day");
+
+  next.addEventListener("click", () => {
+    if (date.innerHTML >= today.getDate()) {
+      previous.classList.remove("hide");
+    }
+    day++;
+    date.innerHTML = day;
+  });
+
+  previous.addEventListener("click", () => {
+    if (date.innerHTML > today.getDate()) {
+      day--;
+      date.innerHTML = day;
+      if (date.innerHTML == today.getDate()) {
+        previous.classList.add("hide");
+      }
+    }
+  });
+}
+
 // Check for rain
-const doesItRain = x => {
+function doesItRain(x) {
   if (x === 3) {
     return true;
   } else {
     return false;
   }
-};
+}
 
 function getWeather(url) {
   fetch(url)
@@ -59,20 +101,17 @@ function getWeather(url) {
       }
 
       if (doesItRain(rain)) {
-        //console.log("RAIN :(");
         const icon = "🌧";
         container.innerHTML = icon;
       } else {
-        //console.log("NO RAIN :)");
         const icon = "☀️";
         container.innerHTML = icon;
       }
 
       const temperature = document.createElement("P");
+      temperature.classList.add("temperature");
       temperature.innerHTML = `${temp} °C`;
       container.appendChild(temperature);
-
-      //console.log(`${temp} °C`);
     });
 }
 

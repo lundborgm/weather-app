@@ -6,7 +6,7 @@
     <title>Weather</title>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
 </head>
 <body>
     <main>
@@ -15,13 +15,18 @@
             <option value="gbg" data-longitude="11.974560" data-latitude="57.708870">Gothenburg</option>
             <option value="malmö" data-longitude="13.000530" data-latitude="55.604047">Malmø</option>
         </select>
-        <div class="info">
-            <small class="date"></small>
-            <small class="time"></small>
+        <div class="flex">
+            <button class="previous-day hide"><</button>
+            <div class="info">
+                <small class="test"></small>
+                <p class="date"></p>
+                <small class="test2"></small>
+                <small class="time"></small>
+            </div>
+            <button class="next-day">></button>
         </div>
         <div class="container"></div>
     </main>
-
     <script src="main.js"></script>
 </body>
 </html>
