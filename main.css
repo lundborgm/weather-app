@@ -7,54 +7,49 @@
 
 main {
   height: 100vh;
-  background-color: rgb(252, 252, 252);
+  background-color: rgb(240, 241, 247);
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   flex-direction: column;
+  padding: 50px 0;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .cities {
-  height: 40px;
-  width: 120px;
-  font-size: 14px;
+  font-size: 18px;
   border: none;
-  box-shadow: 4px 4px 5px 1px rgba(138, 138, 138, 0.75);
   border-radius: 10px;
   cursor: pointer;
   color: rgb(0, 0, 0);
   background-color: rgb(255, 255, 255);
-  padding: 0 10px;
 }
 
 .flex {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  flex-direction: column;
   background-color: #fff;
-  box-shadow: 4px 4px 5px 1px rgba(138, 138, 138, 0.75);
+  box-shadow: 4px 4px 5px 1px rgba(168, 168, 168, 0.479);
   border-radius: 10px;
-  width: 20vw;
-  padding: 20px 10px;
-}
-
-.flex button {
-  background-color: rgba(255, 255, 255, 0);
-  border: none;
-  /* width: 50px;
-  height: 50px; */
-  font-size: 20px;
-  cursor: pointer;
+  width: 90vw;
+  padding: 40px 20px;
+  margin-bottom: 40px;
 }
 
 .info {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 30px 0;
 }
 
 .container {
-  height: 30vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,8 +58,8 @@ main {
 }
 
 .temperature {
-  font-size: 50px;
-  font-weight: 300;
+  font-size: 38px;
+  font-weight: 400;
 }
 
 .date {

@@ -3,8 +3,8 @@
 const cities = document.querySelector(".cities");
 const date = document.querySelector(".date");
 const time = document.querySelector(".time");
-const test = document.querySelector(".test");
-const test2 = document.querySelector(".test2");
+const boxWeekday = document.querySelector(".box-weekday");
+const boxMonth = document.querySelector(".box-month");
 const container = document.querySelector(".container");
 let longitude;
 let latitude;
@@ -24,13 +24,13 @@ let months = [
   "AUG",
   "SEP",
   "OCT",
-  "NOV"
+  "NOV",
 ];
 let weekday = week[today.getDay()];
 const currentMonth = months[month];
-test.innerHTML = weekday;
+boxWeekday.innerHTML = weekday;
 date.innerHTML = day;
-test2.innerHTML = currentMonth;
+boxMonth.innerHTML = currentMonth;
 
 //let hours = today.getHours();
 //let minutes = today.getMinutes();
@@ -43,11 +43,12 @@ function selectLocation() {
 
   let url = `https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/${longitude}/lat/${latitude}/data.json`;
   getWeather(url);
-  selectDate();
-  // add another function here to display and append the data?
+  //selectDate();
 }
 
-function selectDate() {
+/* started working on function to select date
+  
+  function selectDate() {
   const previous = document.querySelector(".previous-day");
   const next = document.querySelector(".next-day");
 
@@ -68,7 +69,8 @@ function selectDate() {
       }
     }
   });
-}
+} 
+*/
 
 // Check for rain
 function doesItRain(x) {
@@ -81,10 +83,10 @@ function doesItRain(x) {
 
 function getWeather(url) {
   fetch(url)
-    .then(response => {
+    .then((response) => {
       return response.json();
     })
-    .then(json => {
+    .then((json) => {
       // should be set to [0] to get the current date/time
       const currentTime = json.timeSeries[0];
       let temp;
@@ -92,7 +94,7 @@ function getWeather(url) {
 
       for (let i = 0; i < currentTime.parameters.length; i++) {
         if (currentTime.parameters[i].name === "t") {
-          temp = currentTime.parameters[i].values[0];
+          temp = Math.round(currentTime.parameters[i].values[0]);
         }
 
         if (currentTime.parameters[i].name === "pcat") {
@@ -117,9 +119,4 @@ function getWeather(url) {
 
 cities.addEventListener("change", selectLocation);
 
-// Create an init function where you run this?
 selectLocation();
-
-// https://opendata.smhi.se/apidocs/metfcst/parameters.html
-// https://opendata.smhi.se/apidocs/metfcst/parameters.html#parameter-pcat
-// https://www.latlong.net/

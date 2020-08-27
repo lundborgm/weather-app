@@ -10,20 +10,19 @@
 </head>
 <body>
     <main>
-        <select class="cities">
-            <option value="sthlm" data-longitude="18.063240" data-latitude="59.334591">Stockholm</option>
-            <option value="gbg" data-longitude="11.974560" data-latitude="57.708870">Gothenburg</option>
-            <option value="malmö" data-longitude="13.000530" data-latitude="55.604047">Malmø</option>
-        </select>
         <div class="flex">
-            <button class="previous-day hide"><</button>
+            <h1>What's the weather like today?</h1>
             <div class="info">
-                <small class="test"></small>
+                <small class="box-weekday"></small>
                 <p class="date"></p>
-                <small class="test2"></small>
+                <small class="box-month"></small>
                 <small class="time"></small>
             </div>
-            <button class="next-day">></button>
+            <select class="cities">
+                <option value="sthlm" data-longitude="18.063240" data-latitude="59.334591">Stockholm</option>
+                <option value="gbg" data-longitude="11.974560" data-latitude="57.708870">Gothenburg</option>
+                <option value="malmö" data-longitude="13.000530" data-latitude="55.604047">Malmø</option>
+            </select>
         </div>
         <div class="container"></div>
     </main>
