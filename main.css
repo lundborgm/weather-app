@@ -70,3 +70,28 @@ h1 {
 .hide {
   opacity: 0;
 }
+
+@media only screen and (min-width: 600px) {
+  main {
+    padding: 80px 0;
+  }
+  .flex {
+    width: 70vw;
+  }
+}
+@media only screen and (min-width: 800px) {
+  .flex {
+    width: 60vw;
+  }
+  h1 {
+    font-size: 28px;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .flex {
+    width: 50vw;
+  }
+  h1 {
+    font-size: 32px;
+  }
+}
